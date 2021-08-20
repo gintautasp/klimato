@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Temperatūros įvedimas</title>
+	
+	<link rel="stylesheet" href="jquery_lenteles.css">
+
+	<style>
+		
+		#patvirtinti {
+			height:50px;
+			width:207px;
+			font-size:25px;
+		}
+		
+		#lentele td,#lentele tr {
+			cellspacing: 3px;
+			border: 1px solid black;
+		}
+		#lentele th { 
+			cellspacing: 3px;
+			border: 1px solid black;
+			background-color: powderblue;
+		}
+		th {
+			border: 1px solid black;
+		}
+		#laikotarpis1, #laikotarpis2, #laikotarpis3 {
+			position: relative;
+			left:12px;
+		}
+	</style>
+	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="jquery_temperaturos.js">  </script>
+
+	<script>
+		
+			 if ( window.history.replaceState ) {  							//perkrovus puslap� i�meta i�saugot� vedimo info 
+				
+				window.history.replaceState( null, null, window.location.href ); 
+			}  
+	</script>
+
+</head>
+
+<body>
+	<h1>Temperatūros</h1>
+	
+	<button id="kliento-dialogas">Nauja temperatūra</button>
+
+	<div id="data_form" title="Miesto įvedimas">
+		<p class="validateTips">Užpildykite visus laukus.</p>	
+		<form action="" method="POST">
+			<fieldset>	
+					<label for="idMiesto">Miesto pavadinimas</label>
+				<select id="idMiesto" name="idMiesto">
+						<option 
+							th:each="miestas:${visu_miestu_info}" th:value="${miestas.getId}" th:text="${miestas.getPav}">		
+						</option>	
+				</select><br>
+					<br><label for="metai">Metai</label>	
+				<input type="number" name="metai" id="metai" value="2021" min="-99999" max="99999"><br>
+				
+					<label for="laikotarpis">Laikotarpis</label>
+				<table id="laikotarpis">
+					<tr>
+						<th>
+								<label for="laikotarpis1">Metinė</label>	
+							<input type="radio" name="laikotarpis" id="laikotarpis1" value="metinė">
+						</th>
+						<th>
+								<label for="laikotarpis2">Sausio</label>	
+							<input type="radio" name="laikotarpis" id="laikotarpis2" value="sausio">
+						</th>
+						<th>
+								<label for="laikotarpis3">Liepos</label>	
+							<input type="radio" name="laikotarpis" id="laikotarpis3" value="liepos">
+						</th>
+					</tr>
+				</table><br>
+
+					<label for="temperatura">Temperatūra °C</label>	
+				<input type="text" name="temperatura" id="temperatura" value="0.0">
+
+				<input type="hidden" name="siusti" value="Patvirtinti">
+				<input type="submit" tabindex="-1" style="position:absolute; top:-1000px" >
+			</fieldset>
+		</form>
+	</div>
+
+	<table	id="lentele">
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				Miestas
+			</th>
+			<th>
+				Metai
+			</th>
+			<th>				
+				Laikotarpis
+			</th>
+			<th>				
+				Temperatūra °C
+			</th>
+
+		</tr>
+		<tr th:each="temperatura : ${visu_temperaturu_info}">
+			<td th:text="${temperatura.getId()}"></td>
+			<td th:text="${temperatura.getMiestai().getPav()}"></td>
+			<td th:text="${temperatura.getMetai()}"></td>
+			<td th:text="${temperatura.getLaikotarpis()}"></td>
+			<td th:text="${temperatura.getTemperatura()} +' °C'"></td>							
+		</tr>
+	</table>
+</body>
+</html> 

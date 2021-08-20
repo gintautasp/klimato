@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ataskaita</title>
+	
+	<link rel="stylesheet" href="jquery_lenteles.css">
+
+	<style>
+		
+		#lentele td,#lentele tr {
+			cellspacing: 3px;
+			border: 1px solid black;
+		}
+		#lentele th { 
+			cellspacing: 3px;
+			border: 1px solid black;
+			background-color: powderblue;
+		}
+
+	</style>	
+
+</head>
+
+<body>
+	<h1>Temperatūros</h1>
+	
+	<a id="metine" href="?laikotarpis=metine" >Metinis filtravimas</a>
+	<a id="sausio" href="?laikotarpis=sausio" >Sausio filtravimas</a>
+	<a id="liepos" href="?laikotarpis=liepos" >Liepos filtravimas</a>
+
+	<table	id="lentele">
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				Miestas
+			</th>
+			<th>
+				Metai
+			</th>
+			<th>				
+				Laikotarpis
+			</th>
+			<th>				
+				Temperatūra °C
+			</th>
+
+		</tr>
+		<tr th:each="mano_rez:${ataskaita}"> 
+			<td th:text="${mano_rez[0]}"></td>
+			<td th:text="${mano_rez[1]}"></td>
+			<td th:text="${mano_rez[2]}"></td>
+			<td th:text="${mano_rez[3]}"></td>
+			<td th:text="${mano_rez[4]}"></td>
+		</tr>
+	</table>
+</body>
+</html> 

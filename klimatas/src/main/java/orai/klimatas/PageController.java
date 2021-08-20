@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class PageController {
@@ -144,6 +145,22 @@ public class PageController {
 		model.addAttribute("ataskaita_sukinys", ataskaita_galutinis.ataskaitaSukinys(ataskaita_zalia));
 		
 		return url_tpl;
-
 	}
+	
+	@RequestMapping(path="/ataskaitax", method= {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody AtaskaitaSukinys ataskaitax( 
+			// @RequestParam(name="ataskaita", required =true, defaultValue="")String ataskaita,
+			@RequestParam(name="laikotarpis", required =true, defaultValue="")String laikotarpis,
+			
+			Model model ) throws IOException {
+		
+		Session session = this.sessionFactory().openSession();
+		AtaskaitaFinal ataskaita_galutinis =  new AtaskaitaFinal( session );
+		
+		// model.addAttribute("ataskaita", ataskaita_galutinis.duomenuFormavimas(laikotarpis));
+		
+		List<Object[]> ataskaita_zalia = ataskaita_galutinis.duomenuFormavimas(laikotarpis);
+		
+		return ataskaita_galutinis.ataskaitaSukinys(ataskaita_zalia);
+	}	
 }

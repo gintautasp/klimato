@@ -1,5 +1,7 @@
 package orai.klimatas;
 
+import javax.persistence.Entity;
+
 public class Ataskaita {	//turi buti panasi i pagrindine lentele tik setteriai ir getteriai atitinka po selecto gautus laukelius ir ju eiliskumas turi buti toks pats kaip lenteleje
     
     private Integer id;

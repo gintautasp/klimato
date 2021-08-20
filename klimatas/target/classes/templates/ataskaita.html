@@ -31,30 +31,9 @@
 
 	<table	id="lentele">
 		<tr>
-			<th>
-				ID
-			</th>
-			<th>
-				Miestas
-			</th>
-			<th>
-				Metai
-			</th>
-			<th>				
-				Laikotarpis
-			</th>
-			<th>				
-				Temperatūra °C
-			</th>
-
-		</tr>
-		<tr th:each="mano_rez:${ataskaita}"> 
-			<td th:text="${mano_rez[0]}"></td>
-			<td th:text="${mano_rez[1]}"></td>
-			<td th:text="${mano_rez[2]}"></td>
-			<td th:text="${mano_rez[3]}"></td>
-			<td th:text="${mano_rez[4]}"></td>
+			<th th:each="miestas : ${miestu_sarasas}" th:text="${miestas}"></th>
 		</tr>
 	</table>
+	<table>
 </body>
 </html> 

@@ -1,6 +1,7 @@
 package orai.klimatas;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -17,7 +18,7 @@ protected Session em;
 		    this.em = em;
 	}
 	
-	 public List<Ataskaita> duomenuFormavimas( String ataskaita ) {
+	 public List<Object[]> duomenuFormavimas( String ataskaita ) {
 		 String filtruoti = ")ORDER BY "
 		 								+ "`temperaturos`.`metai`";
 		 if(ataskaita != null) {
@@ -42,17 +43,17 @@ protected Session em;
 		  	
 		  	System.out.println ( uzklausa_pagal_laikotarpi );
 		    Query query = em.createNativeQuery ( uzklausa_pagal_laikotarpi );
-		    return (List<Ataskaita>) query.getResultList();
+		    return (List<Object[]>) query.getResultList();
 	  }
 	 
-	 public List<String> miestuSarasas(List<Ataskaita> ataskaita) {
+	 public HashSet<String> miestuSarasas(List<Object[]> ataskaita) {
 		 
-		 List<String> miestu_sarasas = new ArrayList<String>(ataskaita.size());
-		 /*int i =0;
-			for( Ataskaita element : ataskaita ){
-			    System.out.println("elementas "+ ataskaita );
-			    i++;
-			}*/
+		 HashSet<String> miestu_sarasas = new HashSet<String>();
+		 
+			for(int i =0; i<ataskaita.size(); i++ ){
+			    // System.out.println("elementas "+ ataskaita );
+			    miestu_sarasas.add( (String) ( (Object[]) ataskaita.get(i) )[1] );
+			}
 			//System.out.println(atsiskaitymas);
 		// miestu_sarasas.add(atas)
 		 return miestu_sarasas;

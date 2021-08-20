@@ -139,9 +139,9 @@ public class PageController {
 		
 		model.addAttribute("ataskaita", ataskaita_galutinis.duomenuFormavimas(laikotarpis));
 		
-		List<Ataskaita> atsiskaitymas = ataskaita_galutinis.duomenuFormavimas(laikotarpis);
+		List<Object[]> atsiskaitymas = ataskaita_galutinis.duomenuFormavimas(laikotarpis);
 		
-		//model.addAttribute("miestu_sarasas",ataskaita_galutinis.miestuSarasas(atsiskaitymas));
+		model.addAttribute("miestu_sarasas",ataskaita_galutinis.miestuSarasas(atsiskaitymas));
 		
 		return url_tpl;
 

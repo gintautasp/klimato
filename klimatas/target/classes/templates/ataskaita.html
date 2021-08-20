@@ -7,7 +7,9 @@
 	<link rel="stylesheet" href="jquery_lenteles.css">
 
 	<style>
-		
+		#lentele td, #lentele th {
+			padding: 3px 4px;
+		}
 		#lentele td,#lentele tr {
 			cellspacing: 3px;
 			border: 1px solid black;
@@ -31,7 +33,12 @@
 
 	<table	id="lentele">
 		<tr>
-			<th th:each="miestas : ${miestu_sarasas}" th:text="${miestas}"></th>
+			<th></th>
+			<th th:each="miestas : ${ataskaita_sukinys.miestu_sarasas}" th:text="${miestas}"></th>
+		</tr>
+		<tr th:each="metai : ${ataskaita_sukinys.metu_sarasas}">
+			<th th:text="${metai}"></th>
+			<td th:each="miestas : ${ataskaita_sukinys.miestu_sarasas}" th:text="${ataskaita_sukinys.getTemperatura ( metai, miestas )}"></td>
 		</tr>
 	</table>
 	<table>

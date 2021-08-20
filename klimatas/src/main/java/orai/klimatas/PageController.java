@@ -137,11 +137,11 @@ public class PageController {
 		Session session = this.sessionFactory().openSession();
 		AtaskaitaFinal ataskaita_galutinis =  new AtaskaitaFinal( session );
 		
-		model.addAttribute("ataskaita", ataskaita_galutinis.duomenuFormavimas(laikotarpis));
+		// model.addAttribute("ataskaita", ataskaita_galutinis.duomenuFormavimas(laikotarpis));
 		
-		List<Object[]> atsiskaitymas = ataskaita_galutinis.duomenuFormavimas(laikotarpis);
+		List<Object[]> ataskaita_zalia = ataskaita_galutinis.duomenuFormavimas(laikotarpis);
 		
-		model.addAttribute("miestu_sarasas",ataskaita_galutinis.miestuSarasas(atsiskaitymas));
+		model.addAttribute("ataskaita_sukinys", ataskaita_galutinis.ataskaitaSukinys(ataskaita_zalia));
 		
 		return url_tpl;
 

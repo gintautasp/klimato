@@ -65,23 +65,39 @@ public class PageController {
 		if (siusti != null && siusti.equals("Patvirtinti")) {
 			
 			Miestai miestai = new Miestai ( 
-				null	
-				,pav
-				, kodas_salies
-				, Double.parseDouble ( platuma )
-				, Double.parseDouble ( ilguma )
-				, Integer.parseInt ( skaicius_gyv )
-				, Double.parseDouble ( plotas )
-				, duom_gav_laikas
-			);
-			miestai_repository.save(miestai);
+					null	
+					,pav
+					, kodas_salies
+					, platuma 
+					, ilguma 
+					, skaicius_gyv 
+					, plotas 
+					, duom_gav_laikas
+				);			
+			
+			if ( miestai.getErrors().size() == 0 ) {
+				
+				System.out.println ( miestai_repository.findByPav ( pav ).isEmpty() );
+				
+				if ( miestai_repository.findByPav ( pav ).isEmpty() ) {
+			
+					miestai_repository.save(miestai);
+					
+				} else {
+					
+					miestai.addError ( "Toks miestas jau yra !" );
+				}
+			}
+			System.out.println ( miestai.getErrors().size() );
+			
+			model.addAttribute("klaidos", miestai.getErrors() );
 			
 			return url_tpl;
 			
 			/*url_tpl="redirect:nuomos_zurnalas?kliento_id="+apklausa.getId();
 			return url_tpl;*/
 		}
-		
+
 		return url_tpl;
 
 	}

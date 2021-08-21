@@ -24,6 +24,11 @@
 			cellspacing: 3px;
 			border: 1px solid black;
 		}
+		
+		#errors td {
+			
+			color: red;
+		}		
 	</style>
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
@@ -46,6 +51,10 @@
 	<h1>Miestai</h1>
 	
 	<button id="kliento-dialogas">Naujas mietas</button>
+	
+	<table id="errors">
+		<tr th:each="klaida : ${klaidos}"><td th:text="${klaida}"></td></tr>
+	</table>	
 
 	<div id="data_form" title="Miesto įvedimas">
 		<p class="validateTips">Užpildykite visus laukus.</p>	
